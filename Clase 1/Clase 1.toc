@@ -1,0 +1,10 @@
+\babel@toc {spanish}{}\relax 
+\beamer@sectionintoc {1}{Introducci\'on}{3}{0}{1}
+\beamer@sectionintoc {2}{Evaluaciones}{5}{0}{2}
+\beamer@sectionintoc {3}{Bibliograf\'ia: Esencial}{6}{0}{3}
+\beamer@sectionintoc {4}{Bibliograf\'ia: Avanzada}{7}{0}{4}
+\beamer@sectionintoc {5}{Repaso}{8}{0}{5}
+\beamer@subsectionintoc {5}{1}{Tipos de Variables}{8}{0}{5}
+\beamer@subsectionintoc {5}{2}{An\'alisis Univariante}{10}{0}{5}
+\beamer@subsectionintoc {5}{3}{Modelo de Regresi\'on Lineal M\'ultiple}{15}{0}{5}
+\beamer@subsectionintoc {5}{4}{Estimaci\'on por M\'inimos Cuadrados Ordianarios}{19}{0}{5}

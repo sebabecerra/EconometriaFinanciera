@@ -1,0 +1,577 @@
+\documentclass{beamer}
+\usepackage[document]{ragged2e}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\mode<presentation> {
+	%\usetheme{default} % liso sin nada bueno simple
+	%\usetheme{Pittsburgh} % liso sin nada bueno simple
+	%\usetheme{Montpellier} % liso con orden arriba
+	%\usetheme{Singapore} % orden arriba liso (mas oscuro)
+	%\usetheme{Boadilla} % parecido al liso, con pie de pagina
+	
+	%\usetheme{Luebeck} % encabezado y pie de pagina (oscuro)
+	%\usetheme{Copenhagen} % encabezado y pie de pagina
+	\usetheme{Madrid} % encabezado y pie de pagina (azul)
+		
+	%\usetheme{Goettingen} % con orden a la derecha
+	%\usetheme{Marburg} % con orden a la derecha (Oscuro)
+	%\usetheme{Hannover} % con orden a la izquierda
+	
+	%%%%% Colores %%%%%
+	%\usecolortheme{albatross} % fondo azul
+	%\usecolortheme{beetle} % fondo plomo
+		
+	%\usecolortheme{dove} % quita todo el color, blanco
+	%\usecolortheme{fly} % todo plomo
+
+	%\usecolortheme{crane} % encabezado pie de pagina, naranjo
+	%\usecolortheme{seagull} % encabezado pie de pagina, plomo
+	\usecolortheme{seahorse} % encabezado pie de pagina azulplomo
+	%\usecolortheme{wolverine} % encabezado pie de pagina, amarillo
+}
+\usepackage{graphicx}
+\usepackage{subfigure}
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Econometr\'ia Financiera]{Econometr\'ia Financiera}
+\subtitle{2022\\
+Tema 4: Metodolog\'ia de Box Jenkins (ARIMA)}
+\author[Rodrigo Ortiz] {Rodrigo Ortiz}
+\institute[UAH]{
+	Universidad Adolfo Ib\'a\~nez \\
+}
+\date{Chile, 2022}
+%---------------------------------------------------------
+% Presentaci—n
+%---------------------------------------------------------
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+%---------------------------------------------------------
+% Indice
+%---------------------------------------------------------
+\begin{frame}
+	\frametitle{Planificaci\'on}
+	\framesubtitle{Agenda}
+	\tableofcontents
+\end{frame}
+
+\section{Series de tiempo no estacionarias}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{No estacionarias}
+
+Hasta ahora nos hemos enfocado en series de tipo \textbf{retorno} que son estacionarias (o al menos razonablemnte).
+
+\vspace{0.5cm}
+
+Sin embargo, algunas series de precios de activos financieros o tipos de cambio tienen a ser \textbf{no estacionarios}.
+
+\vspace{0.5cm}
+
+Muchas veces, en series econ\'omicas y/o financieras, esta \textbf{no estacionariedad} es generada por la presencia de ra\'ices unitarias.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{No estacionarias:  Random Walk}
+
+Un ejemplo cl\'asico de \textbf{serie no estacionaria con ra\'iz unitaria} es el paseo aleatorio (randon walk)
+
+\vspace{0.5cm}
+
+Sea $\lbrace P_t \rbrace$ una serie de tiempo, diremos que $\lbrace P_t \rbrace$  es un RW si satisface:
+
+\begin{align*}
+P_t &= P_{t-1}+ \epsilon_t
+\end{align*}
+
+
+Si pensamoq $\lbrace P_t \rbrace$ como un caso particular de un AR(1) entonces el coeficiente autoregresivo $\rho = 1$, lo cual \textbf{no satisface las condiciones de estacionariedad}.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{ARIMA(p,d,q)}
+
+Consideremos un modelo ARMA(p,q)
+
+\begin{align*}
+Y_t = c + \rho_1 Y_{t-1}+\dots+\rho_p Y_{t-p}+ & \epsilon_t - \theta_1 \epsilon_{t-1}-\dots - \theta_q \epsilon_{t-q}\\
+(1-\rho_1 L-\dots-\rho_pL^p)Y_t & = c+(1-\theta_1 L-\dots-\theta_pL^p)\epsilon_t \\
+\rho(L)Y_t & = c + \theta(L)\epsilon_t
+\end{align*}
+
+Si un modelo ARMA tiene una ra\'iz unitaria, entonces el modelo se vuelve un \textbf{ARIMA(p,d,q)}.
+
+\vspace{0.5cm}
+
+As\'i, si un modelo \textbf{ARIMA} posee una ra\'iz unitaria, es porque el polinomio \textbf{AR} posee una.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{ARIMA(p,d,q)}
+
+El enfoque cl\'asico es \textbf{diferenciar}. Una serie $Y_t$ sigue un \textbf{ARIMA(p,d,q)} si
+
+\begin{align*}
+W_t &= Y_t - Y_{t-1} = (1-L) Y_t
+\end{align*}
+
+sigue un proceso estacionario \textbf{ARMA(p,q)}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{ARIMA(p,d,q)}
+
+La idea de transformar una serie \textbf{no estacionaria} (por ejemplo el log del precio) en una \textbf{estacionaria} (retornos) considerando sus \textit{cambios} se denomina \textbf{diferenciar}.
+
+\vspace{0.5cm}
+
+$W_t = Y_t - Y_{t-1} = \Delta Y_t$ es la primera diferencia de $Y_t$
+
+\vspace{0.5cm}
+
+Podr\'ia ser el caso que $Y_t$ contenga m\'ultiples ra\'ices unitarias y por tanto, sea necesario diferenciar m\'as de una vez para ser estacionaria.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{ARIMA(p,d,q)}
+
+\textbf{Por ejemplo}: Sea $Y_t$ no estacionario, entonces calculamos la primera diferencia como $W_t = Y_t - Y_{t-1}$, si esta primera diferencia es no estacionaria, entonces calculamos la segunda diferencia como 
+
+\vspace{0.5cm}
+
+$Z_t = W_t - W_{t-1} = Y_t - Y_{t-1} - Y_{t-1} + Y_{t-2}$
+
+\vspace{0.3cm}
+
+$ = Y_t -2 Y_{t-1} + Y_{t-2} =(1-2L+L^2)Y_t = (1-L)^2Y_t$
+
+
+\vspace{0.5cm}
+ As\'i, si $Z_t$ estacionaria entonces $Z_t \sim ARMA(p,q)$ y por consiguiente $Y_t \sim ARIMA(p,2,q)$
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{ARIMA(p,d,q)}
+
+Como notaci\'on general para $Y_t \sim ARIMA(p,d,q)$
+
+\begin{align*}
+\rho (L) (1-L)^d Y_t & = c + \theta (L) \epsilon_t
+\end{align*}
+
+\textbf{Nota}: Estamos permitiendo que p,d,q $\in \mathbb{N}$, existen otro tipo de modelos los ARFIMA que permiten \textit{d} \textbf{racional}.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Ejemplo primera diferencia}
+
+Sea el siguiente proceso $Y_t = \alpha t + \epsilon_t$
+
+\vspace{0.6cm}
+
+\begin{enumerate}
+\item[1.] Demuestre que $Y_t$ es no estacionario.
+\item[2.] Calcule la primera diferencia del proceso $Y_t$.
+\item[3.] Demuestre que la primera diferencia de $Y_t$ es un proceso estacionario e indique el modelo que describe al proceso $Y_t$.
+\end{enumerate}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Ejemplo primera diferencia: soluci\'on}
+
+Sea el siguiente proceso $Y_t = \alpha t + \epsilon_t$
+
+\vspace{0.6cm}
+
+\begin{enumerate}
+\item[1.] Demuestre que $Y_t$ es no estacionario.
+
+\begin{align*}
+E[Y_t] & =\alpha t 
+\end{align*}
+
+Por lo tanto, es no estacionario.
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Ejemplo primera diferencia: soluci\'on}
+
+\begin{enumerate}
+\item[2]. Calcule la primera diferencia del proceso $Y_t$.
+
+\vspace{0.5cm}
+
+Sea $W_t = \Delta Y_t = Y_t-Y_{t-1} = (1-L)^{d=1}Y_t$
+
+\vspace{0.5cm}
+
+$= \alpha t + \epsilon_t -\alpha(t-1)-\epsilon_{t-1} = \alpha + \epsilon_t - \epsilon_{t-1}$
+\vspace{0.5cm}
+\item[3.] Demuestre que la primera diferencia de $Y_t$ es un proceso estacionario e indique el modelo que describe al proceso $Y_t$.
+
+\vspace{0.5cm}
+
+Demostraci\'on queda de TAREA.
+
+\vspace{0.5cm}
+
+As\'i, $W_t$ es estacionario, $W_t \sim ARMA(0,1)$. 
+\vspace{0.5cm}
+Por lo tanto, $Y_t \sim ARIMA(0,1,1)$
+\end{enumerate}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Ejemplo segunda diferencia}
+
+Sea el siguiente proceso $Y_t = \alpha t^2 + \epsilon_t$
+
+\vspace{0.6cm}
+
+\begin{enumerate}
+\item[1.] Demuestre que $Y_t$ es no estacionario.
+\item[2.] Calcule la primera diferencia del proceso $Y_t$ y demuestre que no es estacionaria.
+\item[3.] Demuestre que la segunda diferencia de $Y_t$ es un proceso estacionario e indique el modelo que describe al proceso $Y_t$.
+\end{enumerate}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Ejemplo segunda diferencia: soluci\'on}
+
+Sea el siguiente proceso $Y_t = \alpha t^2 + \epsilon_t$
+
+\vspace{0.6cm}
+
+\begin{enumerate}
+\item[1.] Demuestre que $Y_t$ es no estacionario
+
+\begin{align*}
+E[Y_t] & =\alpha t^2
+\end{align*}
+
+Por lo tanto, es no estacionario.
+\end{enumerate}
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Ejemplo segunda diferencia: soluci\'on}
+
+\begin{enumerate}
+\item[2.] Calcule la primera diferencia del proceso $Y_t$ y demuestre que no es estacionaria.
+
+\vspace{0.5cm}
+
+Sea $W_t = \Delta Y_t = Y_t-Y_{t-1} = (1-L)^{d=1}Y_t$
+
+\vspace{0.5cm}
+
+$= \alpha t^2 + \epsilon_t -\alpha(t-1)^2-\epsilon_{t-1} = 2\alpha t - \alpha + \epsilon_t - \epsilon_{t-1}$
+
+\begin{align*}
+E[W_t] & =2\alpha t - \alpha
+\end{align*}
+
+Por lo tanto, $W_t$ es no estacionario.
+
+\end{enumerate}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Ejemplo segunda diferencia: soluci\'on}
+
+\begin{enumerate}
+\item[3.] Demuestre que la segunda diferencia de $Y_t$ es un proceso estacionario e indique el modelo que describe al proceso $Y_t$.
+
+\vspace{0.3cm}
+Sea $Z_t = W_t - W_{t-1}$
+\vspace{0.3cm}
+
+$= 2\alpha t - \alpha + \epsilon_t - \epsilon_{t-1} - 2\alpha (t-1) - \alpha - \epsilon_{t-1} + \epsilon_{t-2}$
+
+\vspace{0.3cm}
+
+$= 2\alpha + \epsilon_t- 2\epsilon_{t-1} + \epsilon_{t-2}$
+\vspace{0.3cm}
+
+Demostraci\'on queda de TAREA.
+
+\vspace{0.5cm}
+
+As\'i, $Z_t$ es estacionario, $Z_t \sim ARMA(0,2)$. 
+\vspace{0.5cm}
+Por lo tanto, $Y_t \sim ARIMA(0,2,2)$
+\end{enumerate}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{No estacionaria}
+
+\textbf{Definici\'on}: Sea $Y_t$ una serie de tiempo \textbf{no} estacionaria, diremos que $Y_t$ es integrable de orden \textbf{d} si y s\'olo si
+
+\begin{align*}
+W_t & = (1-L)^d Y_t \sim estacionario
+\end{align*}
+\end{frame}
+
+
+\section{Pron\'osticos ARIMA}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Pron\'osticos ARIMA: ejemplo}
+
+Para el c\'alculo de errores, los errores se pronostican como cero sobre el set de informaci\'on.
+
+\vspace{0.5cm}
+
+\textbf{Ejemplo}: Sea el proceso $Y_{t+1} = c + \rho Y_t + \epsilon_{t+1}$ con $|\rho| < 1$
+
+\vspace{0.5cm}
+
+\begin{enumerate}
+\item[1.] Calcule el pron\'ostico de $Y_t$ un paso hacia adelante.
+\item[2.] Calcule el error de pron\'ostico de $Y_t$ un paso hacia adelante.
+\item[3.] Calcule el pron\'ostico de $Y_t$ dos pasos hacia adelante.
+\item[4.] Calcule el error de pron\'ostico de $Y_t$ dos pasos hacia adelante.
+\item[5.] Obtenga una expresi\'on general para el pron\'osticos \textbf{h} pasos hacia adelante.
+\item[6.] Calcule el error cuadr\'atico medio de estimaci\'on \textbf{h} pasos hacia adelante.
+\end{enumerate}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Pron\'osticos ARIMA: soluci\'on}
+
+
+\textbf{Ejemplo}: Sea el proceso $Y_{t+1} = c + \rho Y_t + \epsilon_{t+1}$
+
+\vspace{0.5cm}
+
+\begin{enumerate}
+\item[1.] Calcule el pron\'ostico de $Y_t$ un paso hacia adelante.
+
+\begin{align*}
+Y_t^F(1) & = c + \rho Y_t
+\end{align*}
+
+\item[2.] Calcule el error de pron\'ostico de $Y_t$ un paso hacia adelante.
+
+\begin{align*}
+e_t^F(1) & = Y_{t+1} - Y_t^F(1) =  \epsilon_{t+1}
+\end{align*}
+\end{enumerate}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Pron\'osticos ARIMA: ejemplo}
+
+\textbf{Ejemplo}: Sea el proceso $Y_{t+1} = c + \rho Y_t + \epsilon_{t+1}$
+
+\vspace{0.3cm}
+
+\begin{enumerate}
+\item[3.] Calcule el pron\'ostico de $Y_t$ dos pasos hacia adelante.
+
+\vspace{-0.8cm}
+
+\begin{align*}
+Y_t^F(2) & = c + \rho Y_t^F(1) = c + \rho [c+\rho Y_t] \\
+& = c(1+\rho) + \rho^2 Y_t
+\end{align*}
+
+\item[4.] Calcule el error de pron\'ostico de $Y_t$ dos pasos hacia adelante.
+
+\vspace{-0.8cm}
+
+\begin{align*}
+Y_{t+2} & = c + \rho Y_{t+1} + \epsilon_{t+2} \\
+& = c + \rho [c + \rho Y_t + \epsilon_{t+1}] + \epsilon_{t+2}\\
+& = c(1+\rho) + \rho^2 Y_t + \rho \epsilon_{t+1} + \epsilon_{t+2}\\
+e_t^F(2) & = Y_{t+2} - Y_t^F(2) = \rho \epsilon_{t+1} + \epsilon_{t+2}
+\end{align*}
+
+\end{enumerate}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Pron\'osticos ARIMA: soluci\'on}
+
+\textbf{Ejemplo}: Sea el proceso $Y_{t+1} = c + \rho Y_t + \epsilon_{t+1}$
+
+\begin{enumerate}
+\item[5.] Obtenga una expresi\'on general para el pron\'osticos \textbf{h} pasos hacia adelante.
+
+\vspace{-0.8cm}
+
+\begin{align*}
+Y_t^F(h) & = c(1+\rho + \rho^2 + \dots + \rho^{h-1}) + \rho^h Y_t
+\end{align*}
+\item[6.] Calcule el error cuadr\'atico medio de estimaci\'on \textbf{h} pasos hacia adelante.
+
+\vspace{-0.8cm}
+
+\begin{align*}
+ECM & = E[e_t^F(h)^2] = \sum_{i=0}^{h-1} E[\rho^{2i}\epsilon_{t+h-i}^2]\\
+& = \sum_{i=0}^{h-1} \rho^{2i}\sigma^2 = \frac{\sigma^2[1-\rho^{2h}]}{1-\rho^2}
+\end{align*}
+
+\end{enumerate}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Pron\'osticos ARIMA: soluci\'on}
+
+\textbf{Notar} que:
+\vspace{0.5cm}
+\begin{itemize}
+\item 
+\vspace{-0.3cm}
+\begin{align*}
+\lim_{h \longrightarrow \infty} Y_t & = \frac{c}{1-\rho} = E[Y_t]
+\end{align*}
+
+\vspace{0.5cm}
+\item 
+\vspace{-0.5cm}
+\begin{align*}
+\lim_{h \longrightarrow \infty}  ECM & = \frac{\sigma^2}{1-\rho^2} = V(Y_t)
+\end{align*}
+\item ECM es creciente en h, pero converge en el largo plazo a la varianza del proceso.
+\end{itemize}
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Pron\'osticos ARIMA: ejercicios propuestos}
+
+\textbf{Ejercicio 1}: Sea el proceso $Y_{t+1} = \rho Y_t + \epsilon_{t+1} - \theta \epsilon_t$, con $|\rho|<1 $
+
+\vspace{0.5cm}
+
+\begin{enumerate}
+\item[1.] Calcule el pron\'ostico un paso hacia adelante del proceso.
+\item[2.] Calcule el error de pron\'ostico un paso hacia adelante del proceso.
+\item[3.] Obtenga una expresi\'on general para el pron\'ostico h pasos hacia adelante.
+\item[4.] Usando la siguiente representaci\'on de $Y_{t+1} = \sum_{i=0}^{\infty} (\rho - \theta) \rho^i \epsilon_{t-i} + \epsilon_{t+1}$, calcule $E[Y_{t+1}]$ y $V[Y_{t+1}]$.
+\item[5.] Qu\'e sucede con $Y_t^F(h)$ cuando $h \longrightarrow \infty$?
+\end{enumerate}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Series de tiempo}
+\framesubtitle{Pron\'osticos ARIMA: ejercicios propuestos}
+
+\textbf{Ejercicio 2}: Suponga que $X_{t}$ es una caminata aleatoria con deriva e $Y_{t}$ un proceso AR(1) estacionario, ambos independientes entre s\'i. ?`Qu\'e tipo de proceso es $Z_{t}=X_{t}+Y_{t}$?
+
+\vspace{0.5cm}
+\textbf{Ejercicio 3}: Demuestre que el siguiente modelo puede formularse como un ARIMA(0,2,2):
+    \begin{equation}
+        y_t = \mu_t+\epsilon_t
+    \end{equation}
+    \begin{equation}
+        \mu_t = \mu_{t-1}+\beta_{t-1}+\eta_t
+    \end{equation}
+    \begin{equation}
+        \beta_t = \beta_{t-1}+\zeta_t
+    \end{equation}
+    
+    en donde $\epsilon_t$, $\eta_t$ y $\zeta_t$ son ruido blanco, independientes entre s\'i.
+
+\end{frame}
+
+\end{document} 

@@ -1,0 +1,58 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[right=2cm,left=2cm,top=3cm,bottom=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsmath}
+\usepackage[spanish]{babel}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage[usenames]{color}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{verbatim}
+\begin{document}
+\begin{center}
+\large\textbf{Gu\'ia de Ejercicios}
+\end{center}
+\begin{enumerate}
+\item Suponga $Y_{t}\sim$  i.i.d N(1,1) para t impar e $Y_{t}\sim$ i.i.d exp(l) para t par; siendo las Y's independientes entre sí para t par e impar ¿Es $Y_{t}$ un proceso estrictamente estacionario?
+
+\item Suponga que $Y_{t}$ es generado por $Y_{t}=Z+\varepsilon_{t}$, para todo t=1,2,..., donde $\varepsilon_{t}$ es una secuencia i.i.d. con media cero y varianza $\sigma_{\varepsilon}^{2}$. La variable aleatoria Z no cambia en el tiempo; tiene media cero y varianza $\sigma_{Z}^{2}$, y no está correlacionada con $\varepsilon_{t}$
+    \begin{enumerate}
+        \item Encuentre el valor esperado y la varianza de $Y_{t}$. ¿Depende su respuesta de t?
+        \item Encuentre Cov($Y_{t}$,$Y_{t-h}$) para t y h cualesquiera. ¿Es $Y_{t}$ un proceso débilmente estacionario?
+        \item Utilice las partes a) y b) para determinar Corr($Y_{t}$,$Y_{t-h}$) para todo t y h.
+        \item ¿Es $Y_{t}$ un proceso débilmente dependiente o asintóticamente no correlacionado, esto es, Corr($Y_{t}$,$Y_{t-h}$)$\rightarrow 0$ a medida que $h\rightarrow \infty$? Explique.
+    \end{enumerate}
+
+
+
+\item $Y_{t}=\delta_{0}+\delta_{1}t+u_{t}$ \hspace{4mm}  $u_{t}=\alpha u_{t-1}+\varepsilon_{t}$ \hspace{4mm} $|\alpha|<1$,  $\varepsilon_{t}$ es ruido blanco.
+    \begin{enumerate}
+      \item Demuestre que $Y_{t}$ se puede expresar como un proceso AR(1) estacionario en torno a una tendencia:
+    \begin{equation*}
+        Y_{t}=\gamma_{0}+\gamma_{1}t+\gamma_{2}Y_{t-1}+\varepsilon_{t}
+    \end{equation*}
+    \item Indique qué es $\gamma_{i}$, i=0,1,2, en terminos de los parametros originales del proceso. ¿Qué ventaja tiene esta formulación para la estimación de los parametros vía MCO? 
+    \item ¿Que sucederia si $\alpha=1$?
+     \end{enumerate}
+\item Suponga un proceso AR(1) en que $Y_{t}$ está expresado en desviación con respecto a una tendencia determinística:
+    \begin{equation*}
+        Y_{t}-\mu-\delta t=\phi(Y_{t-1}-\mu-\delta(t-1))+\varepsilon
+    \end{equation*}
+    \begin{enumerate}
+        \item Demuestre que para $|\phi|<1$, $Y_{t}$ se revierte a $(\mu+\delta t)$.
+        \item Si $\phi=1$, $Y_{t}$ es una caminata aleatoria con deriva.
+    \end{enumerate}
+
+\item Considere el modelo AR(4) estacional o SAR(4), $Y_t = \gamma_4Y_{t-4}+\epsilon_t$, \hspace{3mm}$|\gamma_4|<1$. Determine la función de autocorrelación simple de $Y_t$.
+
+\item Considere dos procesos MA(2) uno con $\theta_1 = \theta_2 = \frac{1}{6}$ y otro con $\theta_1 = -1$, \hspace{2mm} $\theta_2 = 6$. ¿Como se comparan las raíces de las ecuaciones características inversas?
+
+\item Explique cómo obtendría un estimador consistente del parametro $\theta$ de un proceso MA(1), $Y_t = \epsilon_t-\theta\epsilon_{t-1}$, a partir de la función de autocorrelación simple muestral. ¿Cuál es el rango de valores admisibles del coeficiente de autocorrelación simple, a fin de que $\theta \in \Re$? En general, existirán dos soluciones para $\theta$. ¿Cuál escogería?
+\end{enumerate}
+\end{document} 

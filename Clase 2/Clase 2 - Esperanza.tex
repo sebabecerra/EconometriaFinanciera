@@ -1,0 +1,442 @@
+\documentclass{beamer}
+\usepackage[document]{ragged2e}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\mode<presentation> {
+	%\usetheme{default} % liso sin nada bueno simple
+	%\usetheme{Pittsburgh} % liso sin nada bueno simple
+	%\usetheme{Montpellier} % liso con orden arriba
+	%\usetheme{Singapore} % orden arriba liso (mas oscuro)
+	%\usetheme{Boadilla} % parecido al liso, con pie de pagina
+	
+	%\usetheme{Luebeck} % encabezado y pie de pagina (oscuro)
+	%\usetheme{Copenhagen} % encabezado y pie de pagina
+	\usetheme{Madrid} % encabezado y pie de pagina (azul)
+		
+	%\usetheme{Goettingen} % con orden a la derecha
+	%\usetheme{Marburg} % con orden a la derecha (Oscuro)
+	%\usetheme{Hannover} % con orden a la izquierda
+	
+	%%%%% Colores %%%%%
+	%\usecolortheme{albatross} % fondo azul
+	%\usecolortheme{beetle} % fondo plomo
+		
+	%\usecolortheme{dove} % quita todo el color, blanco
+	%\usecolortheme{fly} % todo plomo
+
+	%\usecolortheme{crane} % encabezado pie de pagina, naranjo
+	%\usecolortheme{seagull} % encabezado pie de pagina, plomo
+	\usecolortheme{seahorse} % encabezado pie de pagina azulplomo
+	%\usecolortheme{wolverine} % encabezado pie de pagina, amarillo
+}
+\usepackage{graphicx}
+\usepackage{subfigure}
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Econometr\'ia Financiera]{Econometr\'ia Financiera}
+\subtitle{2023\\
+Tema 2: Esperanza matem\'atica}
+\author[Rodrigo Ortiz] {Rodrigo Ortiz}
+\institute[UAH]{
+	Universidad Adolfo Ib\'a\~nez \\
+}
+\date{Chile, 2023}
+%---------------------------------------------------------
+% Presentaci—n
+%---------------------------------------------------------
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+%---------------------------------------------------------
+% Indice
+%---------------------------------------------------------
+\begin{frame}
+	\frametitle{Planificaci\'on}
+	\framesubtitle{Agenda}
+	\tableofcontents
+\end{frame}
+
+\section{Tema 2: Esperanza matem\'atica}
+\subsection{Esperanza, varianza y covarianzas de variables aleatorias}
+\subsubsection{Variables discretas}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables discretas: Funci\'on de distribuci\'on de probabilidad}
+
+La \textbf{funci\'on de distribuci\'on de probabilidad}, $P(x )$, de una variable aleatoria discreta X expresa
+la probabilidad de que X tome el valor x, como una funci\'on de x. Es decir,
+\begin{equation*}
+  P(x)=P(X=x)
+\end{equation*}
+para todos los valores de x.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables discretas: Propiedades que deben satisfacer las funciones de probabilidad
+de variables aleatorias discretas}
+
+Sea X una variable aleatoria discreta que tiene una funci\'on de probabilidad $P(x)$. En ese caso,
+\begin{itemize}
+  \item [1.] $0\leq P(x)\leq 1$ para cualquier valor x y
+  \item [2.] Las probabilidades individuales suman 1, es decir,
+\end{itemize}
+
+\begin{equation*}
+  \sum_{x}P(x)=1
+\end{equation*}
+
+donde la notaci\'on indica que el sumatorio abarca todos los valores posibles de x.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables discretas: Funci\'on de probabilidad acumulada}
+
+La \textbf{funci\'on de probabilidad acumulada}, $F(x_0)$, de una variable aleatoria X, expresa la probabilidad
+de que X no tenga un valor superior a $x_0$, como una funci\'on de $x_0$. Es decir,
+
+\begin{equation*}
+  F(x_0)=P(X\leq x_0)
+\end{equation*}
+
+donde la funci\'on se eval\'ua en todos los valores de $x_0$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables discretas: Relaci\'on entre la funci\'on de probabilidad y la funci\'on
+de probabilidad acumulada}
+
+Sea X una variable aleatoria que tiene la funci\'on de probabilidad $P(x)$ y la funci\'on de probabilidad
+acumulada $F(x_0)$. Podemos demostrar que
+
+\begin{equation*}
+  F(x_0)=\sum_{x\leq x_0}P(x)
+\end{equation*}
+
+donde la notaci\'on implica que el sumatorio abarca todos los valores posibles de x que son menores
+o iguales que $x_0$.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables discretas: Valor esperado}
+
+El \textbf{valor esperado}, $E(X)$, de una variable aleatoria discreta X se define de la forma siguiente:
+
+\begin{equation*}
+  E(X)=\mu=\sum_{x}xP(x)
+\end{equation*}
+
+donde la notaci\'on indica que el sumatorio abarca todos los valores posibles de x.
+\vspace{0.3cm}
+
+El valor esperado de una variable aleatoria tambi\'en se llama media y se representa por
+medio del s\'imbolo $\mu$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables discretas: Varianza y desviaci\'on t\'ipica de una variable aleatoria discreta}
+
+Sea $X$ una variable aleatoria discreta. La esperanza de los cuadrados de las diferencias con
+respecto a la media, $(X-\mu)^2$, se llama \textbf{varianza}, se representa por medio del s\'imbolo $\sigma^2$ y viene dada por
+
+\begin{equation*}
+  \sigma^2=E[(X-\mu)^2]=\sum_{x}(x-\mu)^2P(x)
+\end{equation*}
+
+La varianza de una variable aleatoria discreta X tambi\'en puede expresarse de la forma siguiente:
+
+\begin{equation*}
+  \sigma^2=E[X^2]-\mu^2=\sum_{x}x^2P(x)-\mu_x^2
+\end{equation*}
+
+La desviaci\'on t\'ipica, $\sigma_x$, es la ra\'iz cuadrada positiva de la varianza.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables discretas: Funci\'on de probabilidad conjunta}
+
+Sean $X$ e $Y$ un par de variables aleatorias discretas. Su funci\'on de probabilidad conjunta
+expresa la probabilidad de que simult\'aneamente X tome el valor espec\'ifico $x$ e $Y$ tome el valor
+y como funci\'on de $x$ e $y$. La notaci\'on empleada es P(x, y), de donde
+
+\begin{equation*}
+  P(x,y)=P(X=x \cap Y=y)
+\end{equation*}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables discretas: Obtenci\'on de la funci\'on de probabilidad marginal}
+
+Sean $X$ e $Y$ un par de variables aleatorias distribuidas conjuntamente. En este contexto, la funci\'on
+de probabilidad de la variable aleatoria $X$ se llama funci\'on de probabilidad marginal y
+se obtiene sumando las probabilidades conjuntas correspondientes a todos los valores posibles;
+es decir,
+
+\begin{equation*}
+  P(x)=\sum_{y}P(x,y)
+\end{equation*}
+
+Asimismo, la funci\'on de probabilidad marginal de la variable aleatoria $Y$ es
+
+\begin{equation*}
+  P(y)=\sum_{x}P(x,y)
+\end{equation*}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables discretas: Covarianza}
+
+Sea $X$ una variable aleatoria de media $\mu_X$ e $Y$ una variable aleatoria de media $\mu_Y$. El valor esperado
+de $(X-\mu_X)(Y-\mu_Y)$ se llama covarianza entre $X$ e $Y$ y se representa por medio de
+$Cov(X,Y)$. En el caso de las variables aleatorias discretas,
+
+\begin{equation*}
+  Cov(X,Y)=E[(X-\mu_X)(Y-\mu_Y)]=\sum_{x}\sum_{y}(x-\mu_X)(y-\mu_Y)P(x,y)
+\end{equation*}
+
+Una expresi\'on equivalente es
+
+\begin{equation*}
+  Cov(X,Y)=E[XY]-\mu_X\mu_Y=\sum_{x}\sum_{y}xyP(xy)-\mu_X\mu_Y
+\end{equation*}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables discretas: Correlaci\'on}
+
+Sean $X$ e $Y$ variables aleatorias distribuidas conjuntamente. La correlaci\'on entre $X$ e $Y$ es
+
+\begin{equation*}
+  \rho=Corr(X,Y)=\frac{Cov(X,Y)}{\sigma_X\sigma_Y}
+\end{equation*}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Valor esperado de las funciones de variables aleatorias}
+
+Sea X una variable aleatoria cuya funci\'on de probabilidad es $P(x)$ y sea $g(X)$ una funci\'on de X.
+El valor esperado, $E[g(X)]$, de esa funci\'on se define de la forma siguiente:
+
+\begin{align*}
+  E[g(X)]&=\sum_{x}g(x)P(x)\\
+  E[g(X)]&=\int_{x}g(x)f(x)dx
+\end{align*}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables discretas: Resumen de las propiedades de las funciones lineales
+de una variable aleatoria}
+
+Sea X una variable aleatoria de media $\mu_x$ y varianza $\sigma_x^2$ y sean $a$ y $b$ unos n\'umeros fijos constantes cualesquiera. Definamos la variable aleatoria $Y$ como $a+bX$. Entonces, la media y la
+varianza de Y son
+
+\begin{align*}
+  \mu_Y&=E(a+bX)=a+b\mu_X \\
+  \sigma_Y^2&=Var(a+bX)=b^2\sigma_X^2
+\end{align*}
+
+por lo que la desviaci\'on t\'ipica de $Y$ es
+
+\begin{align*}
+  \sigma_Y &=|b1| \sigma_X
+\end{align*}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Variables continuas}
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables continuas: Funci\'on de distribuci\'on acumulada}
+
+La \textbf{funci\'on de distribuci\'on acumulada}, $F(x)$, de una variable aleatoria continua $X$ expresa la
+probabilidad de que $X$ no sea mayor que el valor de $x$, en funci\'on de $x$
+
+\begin{equation*}
+  F(x)= P(X\leq x)
+\end{equation*}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables continuas: Probabilidad de un intervalo utilizando una funci\'on
+de distribuci\'on acumulada}
+
+Sea $X$ una variable aleatoria continua que tiene una funci\'on de distribuci\'on acumulada $F(x)$ y
+sean $a$ y $b$ dos valores posibles de $X$, siendo $a<b$. La probabilidad de que $X$ se encuentre
+entre $a$ y $b$ es
+
+\begin{equation*}
+  P(a<X<b)=F(b)-F(a)
+\end{equation*}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables continuas: Funci\'on de densidad de probabilidada}
+
+Sea $X$ una variable aleatoria continua y $x$ cualquier n\'umero situado en el rango de valores que
+puede tomar esta variable aleatoria. La funci\'on de densidad de probabilidad, $f(x)$, de la variable
+aleatoria es una funci\'on que tiene las siguientes propiedades:
+
+\begin{itemize}
+  \item [1.] $f(x)>0$ para todos los valores de x.
+  \item [2.] El \'area situada debajo de la funci\'on de densidad de probabilidad, $f(x)$, cuando se abarcan
+todos los valores de la variable aleatoria, $X$, es igual a 1,0.
+  \item [3.] Supongamos que se representa gr\'aficamente esta funci\'on de densidad. Sean $a$ y $b$ dos
+valores posibles de la variable aleatoria $X$, siendo $a<b$. En ese caso, la probabilidad
+de que $X$ se encuentre entre $a$ y $b$ es el \'area situada debajo de la funci\'on de densidad
+entre estos puntos.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza, varianza y covarianzas de variables aleatorias}
+\framesubtitle{Variables continuas: Funci\'on de densidad de probabilidada}
+
+\begin{itemize}
+  \item [4.] La funci\'on de distribuci\'on acumulada, $F(x_0)$, es el \'area situada debajo de la funci\'on de
+densidad de probabilidad, $f(x)$, hasta $x_0$:
+
+\begin{equation*}
+  F(x_0)=\int_{x_m}^{x_0}f(x)dx
+\end{equation*}
+  \item [] donde $x_m$ es el valor m\'inimo de la variable aleatoria $X$.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Esperanza y varianza de combinaciones lineales de variables aleatorias}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza y varianza de combinaciones lineales de variables aleatorias}
+\framesubtitle{Sumas de variables aleatorias}
+
+Sean $X_1,X_2,\dots,X_K$, $K$ variables aleatorias que tienen las medias \\
+$\mu_1,\mu_2,\dots,\mu_K$ y las varianzas
+$\sigma_1^2,\sigma_2^2,\dots,\sigma_k^2$. Se cumplen las siguientes propiedades:
+
+\begin{itemize}
+  \item [1.] La media de su suma es la suma de sus medias; es decir,
+  \begin{equation*}
+    E(X_1+X_2+\dots+X_K)=\mu_1+\mu_2+\dots+\mu_K
+  \end{equation*}
+  \item [2.] Si la covarianza entre cada par de estas variables aleatorias es $0$, entonces la varianza
+de su suma es la suma de sus varianzas; es decir,
+    \begin{equation*}
+    Var(X_1+X_2+\dots+X_K)=\sigma_1^2+\sigma_2^2+\dots+\sigma_K^2
+  \end{equation*}
+  \item [] Sin embargo, si las covarianzas entre pares de variables aleatorias no son 0, la varianza
+de su suma es
+    \begin{equation*}
+    Var(X_1+X_2+\dots+X_K)=\sigma_1^2+\sigma_2^2+\dots+\sigma_K^2+2\sum_{i=1}^{K-1}\sum_{j=i+1}^{K}Cov(X_i,X_j)
+  \end{equation*}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza y varianza de combinaciones lineales de variables aleatorias}
+\framesubtitle{Diferencias entre un par de variables aleatorias}
+
+Sean $X$ e $Y$ un par de variables aleatorias que tienen las medias $\mu_X$ y $\mu_Y$ y las varianzas $\sigma_X^2$ y $\sigma_Y^2$. Se cumplen las siguientes propiedades:
+
+
+\begin{itemize}
+  \item [1.] La media de su diferencia es la diferencia de sus medias; es decir,
+  \begin{equation*}
+    E(X-Y)=\mu_X-\mu_Y
+  \end{equation*}
+  \item [2.] Si la covarianza entre $X$ e $Y$ es 0, entonces la varianza de su diferencia es
+    \begin{equation*}
+    Var(X-Y)=\sigma_X^2+\sigma_Y^2
+  \end{equation*}
+  \item [3.] Si la covarianza entre $X$ e $Y$ no es 0, entonces la varianza de su diferencia es
+    \begin{equation*}
+    Var(X-Y)=\sigma_X^2+\sigma_Y^2-Cov(X,Y)
+  \end{equation*}
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Esperanza y varianza de combinaciones lineales de variables aleatorias}
+\framesubtitle{Variables discretas: Resumen de las propiedades de las funciones lineales
+de una variable aleatoria}
+
+\begin{enumerate}
+    \item La variable aleatoria continua X tiene una funci\'on densidad de probabilidad dada por $f(x) = cx, 0<x<1$, siendo c una constante positiva. Determine Var(X).
+    \item Sean X e Y dos variable aleatorias con primeros y segundos momentos dados por $E(X)=\mu_X, E(y)=\mu_Y, Var(X) = \sigma_{XX}, Var(X) = \sigma_{YY}$, y $cov(X,Y) = \sigma_{XY}$. Def\'inase $\gamma=\sigma_{XY}/\sigma_{XX}$ y $\alpha=\mu_Y - \gamma \mu_X$.
+    \begin{enumerate}
+        \item Demuestre que la variable aleatoria z= ($Y-\alpha -\gamma X$) no est\'a correlacionada con X. Encuentre su media $E[z]$ y varianza $Var(z)$.
+        \item Para constantes arbitrarias a y b, considere la variable aleatoria $Z=Y-a-bX$. Encuentre los valores de a y b que minimizan $E(Z^2)$.
+    \end{enumerate}
+    \item Si $Var(X_1) = 5$, $Var(X_2) = 4$, $Var(X_3)=7$, $Cov(X_1, X_2) = 3$, $Cov(X_1,X_3)= -2$ y $X_2$ y $X_3$ son independientes, encuentre la covarianza de $Y_1=X_1-2X_2+3X_3$ e $Y_2 = -2X_1+3X_2+4X_3$
+\end{enumerate}
+
+\end{frame}
+
+
+
+\end{document} 

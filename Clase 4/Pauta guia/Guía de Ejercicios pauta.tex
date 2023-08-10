@@ -1,0 +1,491 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[right=2cm,left=2cm,top=3cm,bottom=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsmath}
+\usepackage[spanish]{babel}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage[usenames]{color}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{verbatim}
+\begin{document}
+\begin{center}
+\large\textbf{Gu\'ia de Ejercicios}
+\end{center}
+\begin{enumerate}
+\item Suponga $Y_{t}\sim$  i.i.d N(1,1) para t impar e $Y_{t}\sim$ i.i.d exp(l) para t par; siendo las Y's independientes entre sí para t par e impar ¿Es $Y_{t}$ un proceso estrictamente estacionario?
+    \\
+    \textbf{Respuesta:} Proceso:
+    \\
+    \begin{equation*}
+        Y_{t}=\left\lbrace\begin{array}{c}
+        \sim i.i.d~N(1,1)~\forall t~impar \\
+        \sim e^{\lambda},~\lambda=1, \forall~t~par
+        \end{array}\right.
+    \end{equation*}
+    $Y_{t}$ es debilmente estacionario porque:
+    \begin{equation*}
+        E[Y_{t}]=\left\lbrace\begin{array}{c}
+        1,~\forall t~impar \\
+        1/1=1, \forall~t~par~(*)
+            \end{array}\right.
+    \end{equation*}
+    \begin{equation*}
+        Var[Y_{t}]=\left\lbrace\begin{array}{c}
+        1,~\forall t~impar \\
+        1/1^{2}=1, \forall~t~par~(*)
+    \end{array}\right.
+    \end{equation*}
+    Pero para ser estrictamente estacionario se requiere que la función de distribución conjunta sea la misma a traves del tiempo, es decir, que la distribución de $\{Y_{t}\}=Distr.\quad\{Y_{t+k}\}\quad \forall$
+    \\
+    Tomemos arbitrariamente la distribución conjunta de $Y_{1},Y_{3}$
+    \\
+    Por independencia de $Y_{t}$ la densidad conjunta es el producto de las densidades individuales.
+        \begin{equation*}
+            f(Y_{1},Y_{3})=f(Y_{1})\cdot f(Y_{3})=\sim N(1,1)
+        \end{equation*}
+        Pero no se cumple para el caso de
+        \begin{equation*}
+            f(Y_{2},Y_{4})= E[Y_{2}Y_{4}]=E[e^{1}e^{1}]=E[e^{2}]=1/2
+        \end{equation*}
+        \begin{equation*}
+            Var[Y_{2}Y_{4}]=Var[e^{1}e^{1}]=Var[e^{2}]=1/2^{2}=1/4
+        \end{equation*}
+
+        \begin{equation*}
+           \therefore \quad F(Y_{1},Y_{3}) \neq F(Y_{2},Y_{4})
+        \end{equation*}
+
+
+
+
+
+\item Suponga que $Y_{t}$ es generado por $Y_{t}=Z+\varepsilon_{t}$, para todo t=1,2,..., donde $\varepsilon_{t}$ es una secuencia i.i.d. con media cero y varianza $\sigma_{\varepsilon}^{2}$. La variable aleatoria Z no cambia en el tiempo; tiene media cero y varianza $\sigma_{Z}^{2}$, y no está correlacionada con $\varepsilon_{t}$
+    \begin{enumerate}
+        \item Encuentre el valor esperado y la varianza de $Y_{t}$. ¿Depende su respuesta de t?
+        \\
+        \textbf{Respuesta:}
+        \begin{equation*}
+            E[Y_{t}]=E[Z]+E[\varepsilon_{t}]=0
+        \end{equation*}
+        \begin{equation*}
+            Var[Y_{t}]=Var[Z]+Var[\varepsilon_{t}]+2Cov(Z,\varepsilon_{t})=\sigma_{Z}^{2}+\sigma_{\varepsilon}^{2}
+        \end{equation*}
+        Independiente de $t$
+
+
+
+        \item Encuentre Cov($Y_{t}$,$Y_{t-h}$) para t y h cualesquiera. ¿Es $Y_{t}$ un proceso débilmente estacionario?
+        \\
+        \textbf{Respuesta:}
+        \\
+        $Cov(Y_{t},Y_{t-h})\quad\quad \forall t~y~h$
+        \begin{equation*}
+            =Cov(Z,Z)+Cov(Z,\varepsilon_{t-h})+Cov(\varepsilon_{t},Z)+Cov(\varepsilon_{t},\varepsilon_{t-h})
+        \end{equation*}
+        \begin{equation*}
+            =Var(Z)
+        \end{equation*}
+        \begin{equation*}
+             Cov(Y_{t},Y-{t-h})=\sigma_{Z}^{2}
+        \end{equation*}
+        $\therefore \quad\quad Y_{t}$ es debilmente estacionario.
+
+
+        \item Utilice las partes a) y b) para determinar Corr($Y_{t}$,$Y_{t-h}$) para todo t y h.
+        \\
+        \textbf{Respuesta:}
+        \begin{equation*}
+            Corr(Y_{t},Y_{t-h})=\frac{Cov(Y_{t},Y_{t-h})}{\sqrt{Var(Y_{t})\cdot Var(Y_{t-h})}}=\frac{\sigma_{Z}^{2}}{\sigma_{Z}^{2}+\sigma_{\varepsilon}^{2}}
+        \end{equation*}
+
+        \item ¿Es $Y_{t}$ un proceso débilmente dependiente o asintóticamente no correlacionado, esto es, Corr($Y_{t}$,$Y_{t-h}$)$\rightarrow 0$ a medida que $h\rightarrow \infty$? Explique.
+        \\
+        \textbf{Respuesta:}
+        \\
+        En c) vimos que $Corr(Y_{t},Y_{t-h})=\frac{\sigma_{Z}^{2}}{\sigma_{Z}^{2}+\sigma_{\varepsilon}^{2}} \quad \quad \forall t,h$
+        \\
+        $\therefore\quad \quad Y_{t}$ no es debilmente dependiente; la $Corr(Y_{t},Y_{t-h})\nrightarrow0$ cuando $h\rightarrow\infty$, ya que esa correlación siempre es constante
+    \end{enumerate}
+
+
+
+\item $Y_{t}=\delta_{0}+\delta_{1}t+u_{t}$ \hspace{4mm}  $u_{t}=\alpha u_{t-1}+\varepsilon_{t}$ \hspace{4mm} $|\alpha|<1$,  $\varepsilon_{t}$ es ruido blanco
+    \begin{enumerate}
+      \item Demuestre que $Y_{t}$ se puede expresar como un proceso AR(1) estacionario en torno a una tendencia:
+    \begin{equation*}
+        Y_{t}=\gamma_{0}+\gamma_{1}t+\gamma_{2}Y_{t-1}+\varepsilon_{t}
+    \end{equation*}
+    \item Indique qué es $\gamma_{i}$, i=0,1,2, en terminos de los parametros originales del proceso. ¿Qué ventaja tiene esta formulación para la estimación de los parametros vía MCO?
+    \\
+    \textbf{Respuesta:}
+    \\
+    En $Y_{t}=\delta_{0}+\delta_{1}t+u_{t}$ (1), $u_{t}=Y_{t}-\delta_{0}-\delta_{1}t$; $\therefore$ $u_{t-1}=Y_{t-1}-\delta_{0}-\delta_{1}(t-1)$
+    \\
+    \\
+    $\therefore$ Podemos usar (1) en $u_{t}=\alpha u_{t-1}+\varepsilon_{t}$(2)
+    \begin{equation*}
+        Y_{t}-\delta_{0}-\delta_{1}t=\alpha(Y_{t-1}-\delta_{0}-\delta_{1}t+\delta_{1})+\varepsilon_{t}
+    \end{equation*}
+    \begin{equation*}
+        Y_{t}=\delta_{0}+\delta_{1}t+\alpha Y_{t-1} -\alpha \delta_{0}-\alpha \delta_{1}t+\alpha \delta_{1}+\varepsilon_{t}
+    \end{equation*}
+    \begin{equation*}
+        Y_{t}=\alpha Y_{t-1}+\delta_{1}t(1-\alpha)+\delta_{0}(1-\alpha)+\alpha\delta_{1}+\varepsilon_{t}
+    \end{equation*}
+    \begin{equation*}
+         Y_{t}=\alpha \delta_{1}+(1-\alpha)\delta_{0}+\delta_{1}(1-\alpha)t+\alpha Y_{t-1}+\varepsilon_{t}
+    \end{equation*}
+    \begin{equation*}
+        \therefore \quad \quad \gamma_{0}=\alpha \delta_{1}+(1-\alpha)\delta_{0}\quad ;\gamma_{1}=\delta_{1}(1-\alpha)t\quad ; \gamma_{2}=\alpha Y_{t-1}
+    \end{equation*}
+    $Y_{t}=\gamma_{0}+\gamma_{1}t+\gamma_{2}Y_{t-1}+\varepsilon_{t}$ es D.E porque $|\gamma_{2}|=|\alpha|<1$
+    \\
+    \\
+    Ademas, $\varepsilon_{t}$ es R.B lo que facilita la estimación por MCO. Varianzas y estadígrafos estarán correctamente calculados.
+    \\
+    \\
+   \item ¿Que sucederia si $\alpha=1$?
+    \\
+    \textbf{Respuesta:}
+    \\
+    Si $\alpha=1$, $Y_{t}$ es C.A con deriva
+    \begin{center}
+       $Y_{t}=\delta_{1}+Y_{t-1}+\varepsilon_{t} \quad \therefore \quad Y_{t}$ no es D.E
+    \end{center}
+    Pero sabemos que su primera diferencia si lo es:
+    \begin{equation*}
+       Y_{t}-Y_{t-1}=\delta_{1}+\varepsilon
+    \end{equation*}
+    \begin{equation*}
+       \vartriangle Y_{t}=\delta_{1}+\varepsilon \quad \quad \hat{\delta}_{1}=\sum_{t=2}^{T}\vartriangle Y_{t}/T-1
+    \end{equation*}
+    \\
+    \end{enumerate}
+\item Suponga un proceso AR(1) en que $Y_{t}$ está expresado en desviación con respecto a una tendencia determinística:
+    \begin{equation*}
+        Y_{t}-\mu-\delta t=\phi(Y_{t-1}-\mu-\delta(t-1))+\varepsilon
+    \end{equation*}
+    \begin{enumerate}
+        \item Demuestre que para $|\phi|<1$, $Y_{t}$ se revierte a $(\mu+\delta t)$.
+        \newline
+        \textbf{Respuesta:}
+        \begin{equation*}
+            Y_{t}-\mu-\delta t=\phi Y_{t-1}-\phi \mu-\phi\delta(t-1)+\varepsilon_{t}
+        \end{equation*}
+        \begin{equation*}
+            Y_{t}(1-\phi L)=(1-\phi)\mu+\delta t-\phi\delta(t-1)+\varepsilon_{t}\quad (*)
+        \end{equation*}
+        \begin{equation*}
+            Y_{t}=\frac{(1-\phi)\mu}{(1-\phi L)}+\frac{\delta t}{(1-\phi L)}-\frac{\phi\delta(t-1)}{(1-\phi L)}+\frac{\varepsilon_{t}}{(1-\phi L)}
+        \end{equation*}
+        \begin{equation*}
+            Y_{t}=\mu+\delta\sum_{i=0}^{\infty}\phi^{i}(t-i)-\delta\phi\sum_{i=0}^{\infty}\phi^{i}(t-1-i)+\sum_{i=0}^{\infty}\phi^{i}\varepsilon_{t-i}
+        \end{equation*}
+        Expandiendo algunos terminos de las $\sum$, tenemos
+        \begin{equation*}
+            Y_{t}=\mu+(\delta t+\delta\phi(t-1)+\delta\phi^{2}(t-2)...)-\delta\phi((t-1)+\phi(t-2)...)+(\varepsilon_{t}+\phi\varepsilon_{t-1}+\phi^{2}\varepsilon_{t-2}...)
+        \end{equation*}
+        \begin{equation*}
+            \therefore\quad Y_{t}=\mu+\delta_{t}+\sum_{i=0}^{\infty}\phi^{i}\varepsilon_{t-i}
+        \end{equation*}
+        \begin{equation*}
+            E[Y_{t}]=E[\mu]+E[\delta t]+\sum_{i=0}^{\infty}\phi^{i}E[\varepsilon_{t-i}]
+        \end{equation*}
+        \begin{equation*}
+            E[Y_{t}]=\mu+\delta t
+        \end{equation*}
+        \begin{equation*}
+            Var[Y_{t}]=\sum_{i=0}^{\infty}\phi^{2i}Var(\varepsilon_{t-i})=\sigma^{2}\sum_{i=0}^{\infty}\phi^{2i}\quad\rightarrow\quad Var[Y_{t}]=\sigma^{2}\frac{1}{1-\phi^{2}]}
+        \end{equation*}
+        \begin{equation*}
+            Var[Y_{t}]=\frac{\sigma^{2}}{1-\phi^{2}}
+        \end{equation*}
+        \item Si $\phi=1$, $Y_{t}$ es una caminata aleatoria con deriva.
+        \newline
+        \newline
+        \textbf{Respuesta:}
+        \newline
+        En (*) $\rightarrow\quad Y_{t}(1-\phi L)=(1-\phi)\mu+\delta t-\phi\delta(t-1)+\varepsilon_{t}$ / con $\phi=1$
+        \begin{equation*}
+            Y_{t}-Y_{t-1}=\delta t-\delta t+\delta+\varepsilon_{t}
+        \end{equation*}
+        \begin{equation*}
+            Y_{t}=\delta+Y_{t-1}+\varepsilon_{t}\quad\rightarrow\quad C.A.~con~deriva
+        \end{equation*}
+    \end{enumerate}
+
+\item Considere el modelo AR(4) estacional o SAR(4), $Y_t = \gamma_4Y_{t-4}+\epsilon_t$, \hspace{3mm}$|\gamma_4|<1$. Determine la función de autocorrelación simple de $Y_t$.
+    \newline
+    \textbf{Respuesta:}
+    \\
+    Si actuamos recursivamente:
+    \begin{equation*}
+        Y_{t-4} = \gamma_4Y_{t-8}+\epsilon_{t-4}
+    \end{equation*}
+    \begin{equation*}
+        \Rightarrow Y_t = \gamma_4(\gamma_4Y_{t-8}+\epsilon_{t-4})+\epsilon_t
+    \end{equation*}
+    \begin{equation*}
+        Y_t = \gamma^2_4Y_{t-8}+\gamma_4\epsilon_{t-4}+\epsilon_t
+    \end{equation*}
+    Por su parte:
+    \begin{equation*}
+        Y_{t-8} = \gamma_4Y_{t-12}+ \epsilon_{t-8}
+    \end{equation*}
+    \begin{equation*}
+        \Rightarrow Y_t = \gamma_4^2 (\gamma_4Y_{t-12}+\epsilon_{t-8})+ \gamma_4\epsilon_{t-4}+\epsilon_t
+    \end{equation*}
+    \begin{equation*}
+        Y_t = \gamma^3_4 Y_{t-12}+\gamma_4^2\epsilon_{t-8}+\gamma_4\epsilon_{t-4}+\epsilon_t
+    \end{equation*}
+    En general, podemos representar el proceso así:
+    \begin{equation*}
+        Y_t = \epsilon_t+\gamma_4\epsilon_{t-4}+\gamma_4^2\epsilon_{t-8}+\gamma^3_4\epsilon_{t-12}+...+\gamma_4^i\epsilon_{t-4i}+\gamma_4^{i+1}Y_{t-4(i+1)}
+    \end{equation*}
+    Dado que $|\gamma_4|<1$ cuando $i \rightarrow \infty ; \gamma_4^i\rightarrow 0$. e $Y_t = \sum_{i=0}^\infty \gamma_4^i\epsilon_{t-4i}$
+    o podemos aplicar teorema de Wold y representar el proceso como MA($\infty$).
+    \begin{equation*}
+        Y_t = \gamma_4Y_{t-4}+\epsilon_t \hspace{3mm}\rightarrow (1-\gamma_4L^4)Y_t= \epsilon_t
+    \end{equation*}
+    \begin{equation*}
+        Y_t = \left( \frac{1}{1-\gamma_4L^4}\right)\epsilon_t \rightarrow Y_t = \sum_{i=0}^{\infty}\gamma_4^iL^{4i}\epsilon_t
+    \end{equation*}
+    \begin{equation*}
+        \therefore \hspace{3mm} Y_t = \sum_{i=0}^\infty \gamma_4^i\epsilon_{t-4i}
+    \end{equation*}
+    \begin{equation*}
+        \Rightarrow Y_t = \epsilon_t + \gamma_4\epsilon_{t-4}+ \gamma^2_4\epsilon_{t-8}+\gamma^3_4\epsilon_{t-12}...
+    \end{equation*}
+    Para calcular la FAC necesitamos $COV(Y_t,Y_{t_4k})$:
+    \newline
+    \newline
+    \textbf{i)} Si K=0:
+    \begin{equation*}
+        Cov(Y_t,Y_t) = Var(Y_t) = Var(\epsilon_t)+\gamma_4^2Var(\epsilon_{t-4})+\gamma^4Var(\epsilon_{t-8})+ \gamma^6
+    \end{equation*}
+    dadod que $\epsilon_t$ es R.B:
+    \begin{equation*}
+        Var(\epsilon_t) = Var(\epsilon_{t-4})= Var(\epsilon_{t-8}) = \sigma_{\epsilon}^2
+    \end{equation*}
+    \begin{equation*}
+        \therefore \hspace{3mm} Var(Y_t) = \sigma^2_{\epsilon}(1+\gamma_4^2+\gamma_4^4+\gamma_4^6...) \hspace{3mm} \text{pero} |\gamma_4|<1
+    \end{equation*}
+    \begin{equation*}
+        Var(Y_t) = \frac{\sigma_{\epsilon}^2}{1-\gamma_4^2}
+    \end{equation*}
+    \newline
+    \newline
+    \textbf{ii)} Si k=1 $\rightarrow Cov(Y_t,Y_{t-4})$:
+    \begin{equation*}
+        Cov\left[\epsilon_t+\gamma_4^2\epsilon_{t-8}+\gamma^3\epsilon_{t-12}... ; \epsilon_{t-4} + \gamma_4\epsilon_{t-8}+\gamma_4\epsilon_{t-12}+\gamma^3\epsilon_{t-16}...  \right]
+    \end{equation*}
+    \begin{equation*}
+        = \gamma_4Var(\epsilon_t)+\gamma_4^3Var(\epsilon_t)+ \gamma_4^5Var(\epsilon_t)
+    \end{equation*}
+    \begin{equation*}
+        = \sigma_{\epsilon}^2(\gamma_4+\gamma_4^3+\gamma_4^5...)
+    \end{equation*}
+    \begin{equation*}
+        \sigma_{\epsilon}^2\gamma_4(1+\gamma_4^2+\gamma_4^4+\gamma_4^6+...)
+    \end{equation*}
+    De esta forma:
+    \begin{equation*}
+        Cov(Y_t,Y_{t-4}) = \frac{\sigma_{\epsilon}^2\gamma_4}{1-\gamma_4^2} \hspace{3mm} \Rightarrow Cov(Y_t, Y_{t-4}) = \gamma_4 \lambda_0 = \lambda_4
+    \end{equation*}
+    \begin{equation*}
+        \Rightarrow(Y_t,Y_{t-8}) = \frac{\sigma_{\epsilon}^2\sigma_4^2}{1-\sigma_4^2} \Rightarrow Cov(Y_t,Y_{t-8})=\sigma_4^2\lambda_0 = \lambda_8
+    \end{equation*}
+    La función $\rho_k$, vienen dada por:
+    \begin{equation*}
+    \left .
+        \begin{array}{rcl}
+            \rho_0 = \frac{\lambda_0}{\lambda_0} = 1\\
+            \\
+            \rho_4 = \frac{\lambda_4}{\lambda_0} = \frac{\sigma_4\lambda_0}{\lambda_0} = \sigma_4\\ \\
+            \rho_8 = \frac{\lambda_8}{\lambda_0} = \frac{\sigma_4^2\lambda_0}{\lambda_0} = \gamma_4^2
+        \end{array}
+    \right  \} \therefore
+    \rho_k
+    \left \{
+        \begin{array}{rcl}
+            \gamma_4^{\frac{k}{4}}\hspace{2mm};k=4,8,12...\\ \\
+            0\hspace{2mm}; \text{otro k}
+        \end{array}
+    \right.
+    \end{equation*}
+
+
+
+\item Considere dos procesos MA(2) uno con $\theta_1 = \theta_2 = \frac{1}{6}$ y otro con $\theta_1 = -1$, \hspace{2mm} $\theta_2 = 6$. ¿Como se comparan las raíces de las ecuaciones características inversas?
+    \newline
+    \textbf{Respuesta:}
+    \\
+    En general, un proceso MA(2):
+    \begin{equation*}
+        Y_t = \epsilon_t - \theta_1\epsilon_{t-1}-\theta_2\epsilon_{t-2}
+    \end{equation*}
+    \textbf{i)} Para $\theta_1 = \theta_2 = \frac{1}{6}$:
+    \begin{equation*}
+        Y_t = \epsilon_t-\frac{1}{6}\epsilon_{t-1}-\frac{1}{6}\epsilon_{t-2}
+    \end{equation*}
+    \begin{equation*}
+        Y_t = \left(1-\frac{1}{6}L-\frac{1}{6}L^2\right)\epsilon_t
+    \end{equation*}
+    Le ecuación caracteristica de $1-\frac{1}{6}L-\frac{1}{6}L^2$ es:
+    \begin{equation*}
+        \left(\alpha^2-\frac{1}{6}\alpha-\frac{1}{6}\right) \hspace{6mm} ; \alpha_1\alpha_2 = \frac{-\frac{1}{6}\mp \sqrt{\frac{1}{6}^2+4\frac{1}{6}}}{2}
+        \Rightarrow \left \{
+        \begin{array}{rcl}
+            \alpha_1 = \frac{1}{2}\\ \\
+            \alpha_2 = -\frac{1}{3}
+        \end{array}
+        \right.
+    \end{equation*}
+    \textbf{ii)} Para $\theta_1=1 \hspace{2mm},\hspace{2mm} \theta_2 = 6$:
+    \begin{equation*}
+        Y_t = \epsilon_t+\epsilon_{t-1} - 6\epsilon_{t-2} \Rightarrow Y_t = (1+L-6L^2)\epsilon_t
+    \end{equation*}
+    La ecuación caracteristica es:
+    \begin{equation*}
+        (\alpha^2 +\alpha-6)= \hspace{2mm}\Rightarrow \alpha_1,\alpha_2 = \frac{-1\mp \sqrt{1+24}}{2} \Rightarrow \left \{
+        \begin{array}{rcl}
+            \alpha_1 = 2\\ \\
+            \alpha_2 = -3
+        \end{array}
+        \right.
+     \end{equation*}
+     \\
+    Por lo tanto, las raices de un polinomio son las inversas del otro y recordar que sólo el proceso MA(2) con $\theta_1 = \theta_2 = \frac{1}{6}$ es invertible, esto es, se puede represenar como un AR($\infty$) porque cumple las 3 condiciones:
+    \begin{enumerate}
+        \item $|\theta_2|<1$
+        \item $\theta_2+\theta_1)<1$
+        \item $(\theta_2-\theta_1)<1$
+    \end{enumerate}
+
+\item Explique cómo obtendría un estimador consistente del parametro $\theta$ de un proceso MA(1), $Y_t = \epsilon_t-\theta\epsilon_{t-1}$, a partir de la función de autocorrelación simple muestral. ¿Cuál es el rango de valores admisibles del coeficiente de autocorrelación simple, a fin de que $\theta \in \Re$? En general, existirán dos soluciones para $\theta$. ¿Cuál escogería?
+    \newline
+    \textbf{Respuesta:}
+    \begin{equation*}
+        \text{Proceso} \hspace{2mm} MA(1) \rightarrow Y_t = \epsilon_t - \theta\epsilon_{t-1}
+    \end{equation*}
+    \begin{itemize}
+        \item Estimador consistente de $\theta$ a partir de FAS?
+        \item Rango de $\rho$ para que $\theta \in \Re$
+    \end{itemize}
+    \begin{itemize}
+        \item[i)] Función de auto-covarianza de MA(1):
+        \begin{itemize}
+            \item $\lambda_0:$
+            \begin{equation*}
+                \lambda_0 = Var(Y_t)
+            \end{equation*}
+            \begin{equation*}
+                = Var(\epsilon_t) + \theta^2Var(\epsilon_{t-1)})
+            \end{equation*}
+            \begin{equation*}
+                =\sigma^2 +\theta^2\sigma^2
+            \end{equation*}
+            \begin{equation*}
+                \lambda_0 = (1+\theta^2)\sigma^2
+            \end{equation*}
+
+            \item $\lambda_1:$
+            \begin{equation*}
+                \lambda_1 = Cov(Y_t,Y_{t-1})
+            \end{equation*}
+            \begin{equation*}
+            =Cov(\epsilon_t-\theta\epsilon_{t-1}, \epsilon_{t-2}-\theta\epsilon_{t-3})
+            \end{equation*}
+            \begin{equation*}
+               = -\theta Var(\epsilon_{t-1})
+            \end{equation*}
+            \begin{equation*}
+                \lambda_1 = - \theta \sigma^2
+            \end{equation*}
+
+
+            \item $\lambda_2:$
+            \begin{equation*}
+                \therefore \hspace{3mm} \lambda_k
+                \left \{
+                \begin{array}{rcl}
+                    (1+\theta^2)\sigma^2 \hspace{3mm} \text{si}\hspace{2mm} k=0\\ \\
+                    -\theta\sigma^2 \hspace{3mm} \text{si}\hspace{2mm} k=1 \\ \\
+                    0 \hspace{3mm} \text{si}\hspace{2mm} k>1
+                \end{array}
+                \right.
+            \end{equation*}
+        \end{itemize}
+        \item[ii)] La FAS:
+        \begin{itemize}
+            \item $\rho_0:$
+            \begin{equation*}
+                \rho_0 = 1
+            \end{equation*}
+
+            \item $\rho_1$:
+            \begin{equation*}
+                \rho_1 = \frac{\lambda_1}{\lambda_0}
+            \end{equation*}
+            \begin{equation*}
+                = \frac{-\theta \sigma^2}{(1+\sigma)} = -\frac{\theta}{1+\sigma^2}
+            \end{equation*}
+            \begin{equation*}
+                \therefore \hspace{3mm} \rho_k =
+                \left \{
+                \begin{array}{rcl}
+                    1 \hspace{3mm} \text{si}\hspace{2mm} k=0\\ \\
+                    –\frac{\theta}{1+\theta^2}\hspace{3mm} \text{si}\hspace{2mm} k=1 \\ \\
+                    0 \hspace{3mm} \text{si}\hspace{2mm} k>1
+                \end{array}
+                \right.
+            \end{equation*}
+        \end{itemize}
+    \end{itemize}
+    Dado que:
+    \begin{equation*}
+        \rho_1 = -\frac{\theta}{(1+\theta^2)} \rightarrow 1+\theta^2 = - \frac{\theta}{\rho_1} \rightarrow \theta^2+\left(\frac{1}{\rho_1}\right)\theta+1 = 0
+    \end{equation*}
+    \begin{equation*}
+        \theta = \frac{-\frac{1}{\rho_1}\mp\sqrt{\frac{1}{\rho_1^2}-4}}{2}
+    \end{equation*}
+    A fin que:
+    \begin{equation*}
+        \theta \in \Re \left(\frac{1}{\rho^2_1}\right)-4 \ge 0
+    \end{equation*}
+    \begin{equation*}
+        \therefore \hspace{3mm} \frac{1}{\rho_1^2}\ge 4 \Rightarrow \rho^2_1 \le \frac{1}{4}
+    \end{equation*}
+    \begin{equation*}
+        |\rho_1|\ge \frac{1}{2}
+    \end{equation*}
+    Para que $\theta \in \Re  $
+    \newline
+    \newline
+    Si $|\rho_1| = \frac{1}{2}$ entonces $\theta$ tiene un valor único $\theta = 1$
+    \newline
+    Pero en general habrá dos soluciones posibles para $\theta$ una de las cuales será mayor a 1 en valor absoluto.
+    \newline
+    Ejemplo:
+    \begin{equation*}
+        \theta = \frac{-2,5\mp 1,5}{2}
+    \end{equation*}
+    \begin{equation*}
+        \Rightarrow
+        \left .
+        \begin{array}{rcl}
+            \theta_1 = -\frac{1}{2}\\ \\
+            \theta_2 = -2
+        \end{array}
+        \right \} \text{Si $\theta$ es solución $\frac{1}{\theta}$ también lo será}
+    \end{equation*}
+    Pero a fin de tener un MA(1) invertible debemos escoger $|\theta_1|<1$ con ello el proceso se puede representar como un AR($\infty$).0
+\end{enumerate}
+\end{document} 

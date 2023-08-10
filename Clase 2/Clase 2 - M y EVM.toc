@@ -1,0 +1,4 @@
+\babel@toc {spanish}{}\relax 
+\beamer@sectionintoc {1}{Definiciones importantes}{3}{0}{1}
+\beamer@sectionintoc {2}{M\'etodos de estimaci\'on: M\'etodo de los Momentos}{7}{0}{2}
+\beamer@sectionintoc {3}{M\'etodos de estimaci\'on: Estimaci\'on por m\'axima verosimilitud}{10}{0}{3}

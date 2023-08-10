@@ -1,0 +1,251 @@
+\documentclass{beamer}
+\usepackage[document]{ragged2e}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\mode<presentation> {
+	%\usetheme{default} % liso sin nada bueno simple
+	%\usetheme{Pittsburgh} % liso sin nada bueno simple
+	%\usetheme{Montpellier} % liso con orden arriba
+	%\usetheme{Singapore} % orden arriba liso (mas oscuro)
+	%\usetheme{Boadilla} % parecido al liso, con pie de pagina
+	
+	%\usetheme{Luebeck} % encabezado y pie de pagina (oscuro)
+	%\usetheme{Copenhagen} % encabezado y pie de pagina
+	\usetheme{Madrid} % encabezado y pie de pagina (azul)
+		
+	%\usetheme{Goettingen} % con orden a la derecha
+	%\usetheme{Marburg} % con orden a la derecha (Oscuro)
+	%\usetheme{Hannover} % con orden a la izquierda
+	
+	%%%%% Colores %%%%%
+	%\usecolortheme{albatross} % fondo azul
+	%\usecolortheme{beetle} % fondo plomo
+		
+	%\usecolortheme{dove} % quita todo el color, blanco
+	%\usecolortheme{fly} % todo plomo
+
+	%\usecolortheme{crane} % encabezado pie de pagina, naranjo
+	%\usecolortheme{seagull} % encabezado pie de pagina, plomo
+	\usecolortheme{seahorse} % encabezado pie de pagina azulplomo
+	%\usecolortheme{wolverine} % encabezado pie de pagina, amarillo
+}
+\usepackage{graphicx}
+\usepackage{subfigure}
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Econometr\'ia Financiera]{Econometr\'ia Financiera}
+\subtitle{2023\\
+Tema 2: Estimaci\'on por momentos y m\'axima verosimilitud}
+\author[Rodrigo Ortiz] {Rodrigo Ortiz}
+\institute[UAH]{
+	Universidad Adolfo Ib\'a\~nez \\
+}
+\date{Chile, 2023}
+%---------------------------------------------------------
+% Presentaci—n
+%---------------------------------------------------------
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+%---------------------------------------------------------
+% Indice
+%---------------------------------------------------------
+\begin{frame}
+	\frametitle{Planificaci\'on}
+	\framesubtitle{Agenda}
+	\tableofcontents
+\end{frame}
+
+\section{Definiciones importantes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Definiciones importantes}
+
+\textbf{Definici\'on}: Sea $X_1,\dots,X_n$, n variables aleatorias con funci\'on de probabilidad conjunta $f(x_1,\dots,x_n$ y funciones marginales $f_1(x_1),\dots, f_n(x_n)$
+
+\begin{itemize}
+  \item $f(x_1,\dots,x_n)=f_1(x_1)f_2(x_2),\dots,f_n(x_n)$
+  \item $E[x_1x_2\dots x_n]=E[x_1]E[x_2]\dots E[x_n]$
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Definici\'on}: Sea dice que las n variables aleatorias son id\'enticamente distrubuidas
+si y s\'olo si:
+
+\begin{itemize}
+  \item $f_1(x_1)=f_2(x_2)=\dots=f_n(x_n)$
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Definiciones importantes}
+
+\textbf{Definici\'on}: Sea $X_1,\dots,X_n$, n variables aleatorias conjunto de n variables aleatorias
+$(x_1,\dots,x_n)$ constituye una muestra aleatoria si y s\'olo si:
+
+\begin{itemize}
+  \item $X_1,\dots,X_n$ son variables aleatorias estoc\'asticamentte  independientes
+  \item $X_1,\dots,X_n$ sin variables aleatorias id\'enticamente distribuidas
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Definici\'on}: Sea $X$ variable aleatoria, se define el k-\'esimo momento
+problacional del origen $\mu_k$
+
+\begin{itemize}
+  \item [] $\mu_k=E[x^k]$
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Definici\'on}: Sea $X$ variable aleatoria, se define el k-\'esimo momento
+problacional alrededor de $\mu$, $\mu'_k$
+
+\begin{itemize}
+  \item [] $\mu'_k=E[(x-\mu)^k]$
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Definiciones importantes}
+
+\textbf{Definici\'on}: Se define el k-\'esimo momento muestral alrededor del origen, $M_k$,
+mediante $M_k=\frac{1}{n}\sum_{1=1}^{n}x_i^k$, donde $x_1,\dots,x_n$ constituye una muetsra aleatoria
+de esta poblaci\'on
+
+\vspace{0.5cm}
+
+\textbf{Definici\'on}: Sea $x_1,\dots,x_n$ una muestra aleatoria de una poblaci\'on $X$ se define el
+k-\'esimo momento muestral alrededor de $\overline{x}$, $M_k'$, mediante
+
+\begin{itemize}
+  \item [] $M_k'=E[(x_i-\overline{x})^k]$
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Definiciones importantes: Ejercicios}
+
+\textbf{Ejercicio 1}: Muestre que $E[M_k]=\mu_k$ y $V(M_K)=E\left[\left( \frac{1}{n} \sum_{i=1}^{n}x_i^k\right)^2\right]-\mu_k^2$
+
+\vspace{0.5cm}
+
+\textbf{Ejercicio 2}:Sea $x_1,\dots,x_n$ una muestra aleatoria de una poblaci\'on X. Determine el $E[M_2']$
+\end{frame}
+
+\section{M\'etodos de estimaci\'on: M\'etodo de los Momentos}
+
+\begin{frame}
+\frametitle{M\'etodos de estimaci\'on: M\'etodo de los Momentos}
+
+Sea $X\thicksim f(x,\theta_1,\dots,\theta_k)$ donde $\theta_1,\dots,\theta_k$ son $k$ par\'ametros desconocidos y sea $(x_1,\dots,x_n)$
+una muestra aleatoria de esta poblaci\'on.
+
+\vspace{0.3cm}
+
+Recordemos que el r-\'esimo momento poblacional alrededor del origen es $\mu_1=E[x^n]$ y el r-\'esimo momento muestral alrededor
+del origen $M_r=\frac{1}{n}\sum_{i=1}^{n}x_i^r$
+\vspace{0.3cm}
+
+Para encontrar los estimadores por mommentos de $\theta_1,\dots,\theta_k$ se procede a formar un sistema de k-ecuaciones
+\vspace{0.3cm}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{M\'etodos de estimaci\'on: M\'etodo de los Momentos}
+
+\begin{align*}
+\mu_1&=M_1\\
+\mu_2&=M_2\\
+\vdots & \\
+\mu_k & = M_k
+\end{align*}
+
+Al resolver para $\theta_1,\dots,\theta_k$ encontramos los estimadores por momentos
+$\hat{\theta_1},\dots,\hat{\theta_k}$
+\end{frame}
+
+\begin{frame}
+\frametitle{M\'etodos de estimaci\'on: M\'etodo de los Momentos}
+\textbf{Ejercicio 3}: El tiempo en X segundos que un computador tarda en ejecutar una tarea sigue una variable aletaroria
+con funci\'on de densidad
+
+\begin{align*}
+f(X;\theta)&=\frac{\theta2^\theta}{X^{\theta+1}}, x \geqslant 2, \theta>0
+\end{align*}
+
+encuentre el estimador por momentos para $\theta$.
+
+\end{frame}
+
+\section{M\'etodos de estimaci\'on: Estimaci\'on por m\'axima verosimilitud}
+
+\begin{frame}
+\frametitle{M\'etodos de estimaci\'on: Estimaci\'on por m\'axima verosimilitud(EMV, MLE ingl\'es)}
+
+Sea $X\thicksim f(x,\theta_1,\dots,\theta_k)$ donde $\theta_1,\dots,\theta_k$ son $k$ par\'ametros desconocidos y sea $(x_1,\dots,x_n)$
+una muestra aleatoria de esta poblaci\'on.
+
+\vspace{0.3cm}
+
+Se define la funci\'on de verosimilitud de la muestra aleatoria de los par\'ametros
+
+
+\begin{align*}
+L(X_1,\dots,X_n;\theta_1,\dots,\theta_k)&=f(X_1;\theta_1,\dots,\theta_k)\dots f(X_n;\theta_1,\dots,\theta_k)\\
+& = \prod_{i=1}^{n} f(X_i;\theta_1,\dots,\theta_k)
+\end{align*}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{M\'etodos de estimaci\'on: Estimaci\'on por m\'axima verosimilitud (EMV, MLE ingl\'es)}
+
+Del c\'alculo sabemos que para maximizar una funci\'on obtebemos las derivadas parciales respecto de
+$\theta_1,\dots,\theta_k$ e igualamos a cero y resolvemos el sistema
+
+\begin{align*}
+\frac{\partial L(X_1,\dots,X_n;\theta_1,\dots,\theta_k)}{\partial \theta_1} & =0 \\
+\vdots & \\
+\frac{\partial L(X_1,\dots,X_n;\theta_1,\dots,\theta_k)}{\partial \theta_k} & =0 \\
+\end{align*}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{M\'etodos de estimaci\'on: Estimaci\'on por m\'axima verosimilitud (EMV, MLE ingl\'es)}
+
+$L(X_1,\dots,X_n;\theta_1,\dots,\theta_k)$ en una funci\'on positiva, por lo que el m\'aximo se logra en el mismo punto que
+el de la funci\'on $ln L(X_1,\dots,X_n;\theta_1,\dots,\theta_k)$
+
+\vspace{0.3cm}
+
+Resolviendo el sistema:
+
+\begin{align*}
+\frac{\partial ln L(X_1,\dots,X_n;\theta_1,\dots,\theta_k)}{\partial \theta_1} & =0 \\
+\vdots & \\
+\frac{\partial ln L(X_1,\dots,X_n;\theta_1,\dots,\theta_k)}{\partial \theta_k} & =0 \\
+\end{align*}
+
+
+Del \textbf{Ejercicio 3} encontrar el EMV de $\theta$.
+\end{frame}
+\end{document} 

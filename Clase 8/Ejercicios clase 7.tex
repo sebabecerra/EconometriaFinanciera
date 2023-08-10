@@ -1,0 +1,197 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[right=2cm,left=2cm,top=3cm,bottom=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsmath}
+\usepackage[spanish]{babel}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage[usenames]{color}
+\usepackage{hyperref}
+\usepackage{multicol} 
+\usepackage{tikz}
+\usepackage{verbatim}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+\begin{document}
+\begin{center}
+\large\textbf{Ejercicios clase 7 pauta -Econometr\'ia financiera}
+\end{center}
+
+\begin{itemize}
+\item Ejercicio 1: $Y_{t+1} = \rho Y_t + \epsilon_{t+1} - \theta \epsilon_t$ con $|\rho| < 1$
+
+\begin{enumerate}
+\item Encuentre el pron\'ostico un paso hacia adelante y el error de estimaci\'on.
+
+\textbf{Respuesta:}
+
+\begin{align*}
+Y_t^F (1)&= \rho Y_t - \theta \epsilon_t \\
+e_t^F (1)&= Y_{t+1} - Y_t^F (1) = \epsilon_{t+1}
+\end{align*}
+
+\item Encuentre una expresi\'on general para el pron\'ostico h pasos hacia adelante.
+
+\textbf{Respuesta:}
+
+\begin{align*}
+Y_{t+2} (2)&= \rho Y_{t+1} + \epsilon_{t+2} - \theta\epsilon_{t+1}\\
+&= \rho ( \rho Y_t + \epsilon_{t+1} - \theta \epsilon_t) + \epsilon_{t+2} - \theta\epsilon_{t+1} \\
+&= \rho^2 Y_t - \rho\theta \epsilon_t +\epsilon_{t+1}(\rho - \theta) + \epsilon_{t+2} \\
+& \\
+Y_t^F (2)&= \rho^2 Y_t - \rho \theta \epsilon_t = \rho (\rho Y_t - \theta \epsilon_t) = \rho Y_t^F (1)\\
+& \\
+e_t^F (2)&= Y_{t+2} - Y_t^F (2) = \epsilon_{t+1}(\rho -\theta) + \epsilon_{t+2}
+\end{align*}
+
+
+
+\item Usando la siguiente representaci\'on de $Y_{t+1}$, calcule $E[Y_{t+1}]$ y $V[Y_{t+1}]$
+
+\begin{align*}
+Y_{t+1} &= \sum_{i=0}^\infty (\rho - \theta) \rho^i \epsilon_{t-i}+\epsilon_{t+1}
+\end{align*}
+
+\textbf{Respuesta:}
+
+\begin{align*}
+E[Y_{t+1}] &= \sum_{i=0}^\infty (\rho - \theta) \rho^i E[\epsilon_{t-i}]+E[\epsilon_{t+1}] = 0 \\
+V[Y_{t+1}] &= \sum_{i=0}^\infty (\rho - \theta)^2 \rho^{2i} V[\epsilon_{t-i}]+V[\epsilon_{t+1}] \\
+V[Y_{t+1}] &= \sum_{i=0}^\infty (\rho - \theta)^2 \rho^{2i} \sigma_\epsilon^2+\sigma_\epsilon^2 = \sigma_\epsilon^2 \left[ \frac{(\rho - \theta)^2}{1-\rho^2} + 1 \right]
+\end{align*}
+
+\item ?`Qu\'e sucede con $Y_t^F(h)$ cuando $h \longrightarrow \infty $?
+
+\vspace*{0.5cm}
+
+\textbf{Respuesta:}
+
+\vspace*{0.5cm}
+
+$Y_t^F(h) = \rho^h Y_t - \rho^{h-1} \theta \epsilon_t \longrightarrow 0$
+
+\vspace*{0.5cm}
+
+Esto hace sentido, pues su valor esperado es cero. As\'i, si un proceso es estacionario, en el largo plazo los pron\'osticos convergen a su valor esperado.
+
+\end{enumerate}
+
+
+\item Ejercicio 2
+
+    Suponga que $X_{t}$ es una caminata aleatoria con deriva e $Y_{t}$ un proceso AR(1) estacionario, ambos independientes entre s\'i. ?`Qu\'e tipo de proceso es $Z_{t}=X_{t}+Y_{t}$?
+    \newline
+    \newline
+    \textbf{Respuesta:}
+    \newline
+    $X_{t}=\mu+X_{t-1}+\varepsilon_{t}\quad\quad $ $X_{t}\sim I(1)$
+    \newline
+    $Y_{t}=\gamma_{0}+\gamma_{1}Y_{t-1}+\eta_{t}\quad\quad$ $Y_{t}\sim I(0)~ya~que~|\gamma_{1}|<1$
+    \newline
+    \newline
+    $\varepsilon_{t}$ y $\eta_{t}$ son procesos de ruido blanco independientes.
+    \newline
+    $Z_{t}=X_{t}+Y_{t}$ deberia ser $I(1)$ ya que predomina el orden de integraci\'on superior
+    \newline
+    \newline
+    Demostraci\'on
+    \newline
+    Usando el operador de rezago
+    \begin{equation*}
+       (1-L)X_{t}=\mu+\varepsilon_{t}\quad\rightarrow\quad X_{t}=\frac{(\mu+\varepsilon_{t})}{(1-L)}
+    \end{equation*}
+    \begin{equation*}
+        (1-\gamma_{1}L)Y_{t}=\gamma_{0}+\eta_{t}\quad\rightarrow\quad Y_{t}=\frac{\gamma_{0}+\eta_{t}}{(1-\gamma_{1}L)}
+    \end{equation*}
+    \begin{equation*}
+        \therefore\quad Z_{t}=X_{t}+Y_{t}=\frac{(\mu+\varepsilon_{t})}{(1-L)}+\frac{\gamma_{0}+\eta_{t}}{(1-\gamma_{1}L)}
+    \end{equation*}
+    \begin{equation*}
+        Z_{t}=\frac{(1-\gamma_{1}L)(\mu+\varepsilon_{t})+(1-L)(\gamma_{0}+\eta_{t})}{(1-L)(1-\gamma_{1}L)}
+    \end{equation*}
+    \begin{equation*}
+        (1-L)(1-\gamma_{1}L) Z_{t}=(1-\gamma_{1}L)(\mu+\varepsilon_{t})+(1-L)(\gamma_{0}+\eta_{t})
+    \end{equation*}
+    \begin{equation*}
+        Z_{t}-\gamma_{1}Z_{t-1}-Z_{t-1}+\gamma_{1}Z_{t-2}=\mu+\varepsilon_{t}-\gamma_{1}\mu-\gamma_{1}\varepsilon_{t-1}+\gamma_{0}+\eta_{t}-\gamma_{0}-\eta_{t-1}
+    \end{equation*}
+    \begin{equation*}
+        \vartriangle Z_{t}-\gamma_{1}\vartriangle Z_{t-1}=(1-\gamma_{1})\mu+\varepsilon_{t}-\gamma_{1}\varepsilon_{t-1}+\eta_{t}-\eta_{t-1}
+    \end{equation*}
+    Donde $\varepsilon_{t}-\gamma_{1}\varepsilon_{t-1}+\eta_{t}-\eta_{t-1}=\omega_{t}$ es un proceso MA(1)
+    \begin{equation*}
+        \therefore \vartriangle Z_{t}=(1-\gamma_{1})\mu +\gamma_{1}\vartriangle Z_{t-1}+\omega_{t}\quad\rightarrow\quad D.E~con~|\gamma_{1}|<1
+    \end{equation*}
+    Implica que $Z_{t}$ es un ARIMA(1,1,1) y el proceso diferenciado 1 vez, $\vartriangle Z_{t}$ es D.E con componentes AR(1) y MA(1)
+    \newpage
+ 
+\item Ejercicio 3
+
+    Demuestre que el siguiente modelo puede formularse como un ARIMA(0,2,2):
+    \begin{equation}
+        y_t = \mu_t+\epsilon_t
+    \end{equation}
+    \begin{equation}
+        \mu_t = \mu_{t-1}+\beta_{t-1}+\eta_t
+    \end{equation}
+    \begin{equation}
+        \beta_t = \beta_{t-1}+\zeta_t
+    \end{equation}
+    en donde $\epsilon_t$, $\eta_t$ y $\zeta_t$ son ruido blanco, independientes entre sí.
+    \newline
+    \textbf{Respuesta:}
+    \begin{itemize}
+        \item[(1)] En $\mu_t = Y_t-\epsilon_t$: 
+        \begin{equation*}
+            \Rightarrow \mu_{t-1} = Y_{t-1}-\epsilon_{t-1}
+        \end{equation*}
+        
+        \item[(2)] En $Y_t - \epsilon_t = Y_{t-1}-\epsilon_{t-1}+\beta_{t-1}+\eta_{t}$:
+        \begin{equation*}
+            \therefore \beta_{t-1} = Y_t-\epsilon_t-Y_{t-1}+\epsilon_{t-1}-\eta_{t}
+        \end{equation*}
+        \begin{equation*}
+            \therefore \beta_t = Y_{t+1}-\epsilon_{t+1}-Y_t+\epsilon_t-\eta_{t+1}
+        \end{equation*}
+       
+        \item[(3)] en $\zeta_t = \beta_t-\beta_{t-1}$:
+        \begin{equation*}
+            \zeta_t = Y_{t+1}-\epsilon_{t+1} - Y_t + \epsilon_t-\eta_{t+1}-Y_t+\epsilon_t+Y_{t-1}-\epsilon_{t-1}+\eta_t
+        \end{equation*}
+        Reordenando y agrupando términos en $Y_t$:
+        \begin{equation*}
+            Y_{t+1}-2Y_t+Y_{t-1} = \epsilon_{t+1}-2\epsilon_t+\epsilon_{t-1}+\eta_{t+1}-\eta_t+\zeta_t
+        \end{equation*}
+        \begin{equation*}
+            \Rightarrow (1-2L+L^2)Y_{t+1} = (1-2L+L^2)\epsilon_{t+1}+(1-L)\eta_{t+1}+\zeta_t
+        \end{equation*}
+        \begin{equation*}
+            (1-L)^2Y_{t+1} = (1-L)^2\epsilon_{t+1}+(1-L)\eta_{t+1}+\zeta_t
+        \end{equation*}
+        Donde:
+        \newline
+        $(1-L)^2Y_{t+1}:$ d=2
+        \newline
+        $(1-L)^2\epsilon_{t+1}:$ MA(2)
+        \newline
+        $(1-L)\eta_{t+1}:$ MA(1)
+        Recordemos que:
+        \begin{equation*}
+            MA(2) + MA(1) = MA(2)
+        \end{equation*}
+        De esta forma:
+        \begin{equation*}
+            \Delta^2Y_{t+1} = (1-2L+L^2)\epsilon_{t+1}+(1-L)\eta_{t+1}+\zeta_t
+        \end{equation*}
+        \begin{equation*}
+            \therefore \hspace{3mm} ARIMA(0,2,2)
+        \end{equation*}
+    \end{itemize}
+\end{itemize}   
+    
+\end{document}
